@@ -1,0 +1,68 @@
+ 
+
+#include <iostream>
+using namespace std;
+
+
+int  ReadPositivNumber(string massge) {
+
+
+    int  number = 0;
+
+    do {
+        cout << massge << endl;
+        cin >> number;
+
+
+    } while (number <= 0);
+
+
+    return number;
+
+}
+
+bool CheckPerfectNumber(int number) {
+
+    int sum = 0;
+
+    for (int i = 1; i < number; i++) {
+
+        if (number % i == 0) {
+
+            sum += i;
+        }
+
+
+    }
+    return number == sum;
+
+}
+
+void PrintAllPerfectNUmberFrom1ToN(int number ){
+
+    cout << "All Perfect Number :" << endl;
+    for (int i = 1; i <= number; i++) {
+    
+        if (CheckPerfectNumber(i)) {
+        
+            cout << i << endl;
+
+        }
+  
+    }
+
+
+
+
+}
+
+
+
+
+
+int main()
+{
+    PrintAllPerfectNUmberFrom1ToN(ReadPositivNumber("enter positiv number "));
+}
+
+ 
