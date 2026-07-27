@@ -1,0 +1,55 @@
+
+#include <iostream>
+using namespace std;
+
+
+
+
+
+
+
+int  ReadPositivNumber(string massge) {
+
+
+    int  number = 0;
+
+    do {
+        cout << massge << endl;
+        cin >> number;
+
+
+    } while (number <= 0);
+
+
+    return number;
+
+}
+
+void PrintRevesedOrder(int number) {
+ 
+
+
+    while (number !=0) {
+    
+        cout << number % 10 << endl;
+        number = number / 10 ;
+    
+    }
+
+
+
+}
+
+
+
+
+int main()
+{ 
+
+
+    PrintRevesedOrder(ReadPositivNumber("enter positiv number "));
+
+
+
+}
+ 
