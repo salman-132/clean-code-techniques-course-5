@@ -1,0 +1,62 @@
+#include <iostream>
+using namespace std;
+
+
+int  ReadPositivNumber(string massge) {
+
+
+    int  number = 0;
+
+    do {
+        cout << massge << endl;
+        cin >> number;
+
+
+    } while (number <= 0);
+
+
+    return number;
+
+}
+
+
+
+
+int SumDigitFrequency(int number ,int Frequency) {
+
+    int Remander = 0;
+    int counter = 0;
+    while (number >0) {
+        Remander = number % 10;
+        if (Remander == Frequency) {
+        
+            counter++;
+
+        }
+
+        number = number / 10;
+ 
+    
+    }
+    return counter;
+
+
+}
+
+
+
+
+
+
+int main()
+{
+    int number = ReadPositivNumber("enter positiv number ");     
+    int Frequency = ReadPositivNumber("enter positiv number ");
+
+    
+
+   cout<< SumDigitFrequency(number, Frequency);
+
+   return 0;
+}
+ 
