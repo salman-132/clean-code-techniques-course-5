@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+
+
+
+
+
+
+
+int  ReadPositivNumber(string massge) {
+
+
+    int  number = 0;
+
+    do {
+        cout << massge << endl;
+        cin >> number;
+
+
+    } while (number <= 0);
+
+
+    return number;
+
+}
+
+int  PrintSumOfDigits(int number) {
+
+    int sum;
+
+    while (number != 0) {
+
+         sum +=number % 10 ;
+         number = number / 10;
+
+    }
+
+    return sum;
+
+}
+
+ 
+
+
+
+
+int main()
+{
+    cout<<"The sum of digits " << endl;
+    cout  << PrintSumOfDigits(ReadPositivNumber("enter the positive number "));
+    
+}
