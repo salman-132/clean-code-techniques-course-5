@@ -1,0 +1,83 @@
+#include <iostream>
+using namespace std;
+
+
+int  ReadPositivNumber(string massge) {
+
+
+    int  number = 0;
+
+    do {
+        cout << massge << endl;
+        cin >> number;
+
+
+    } while (number <= 0);
+
+
+    return number;
+
+}
+
+
+int CountDigitFrequency(int number, int Frequency) {
+
+    int Remander = 0;
+    int counter = 0;
+    while (number > 0) {
+        Remander = number % 10;
+        if (Remander == Frequency) {
+
+            counter++;
+
+        }
+
+        number = number / 10;
+
+
+    }
+    return counter;
+
+
+}
+
+void PrintAllDigitsFrequencey(int number)
+{
+    cout << endl;
+
+    for (int i = 0; i < 10; i++)
+    {
+        short DigitFrequncy = CountDigitFrequency(number, i);
+
+        if (DigitFrequncy != 0)
+        {
+            cout << "Digit " << i
+                << " frequency is "
+                << DigitFrequncy << endl;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+int main()
+{
+ 
+    int number = ReadPositivNumber("enter positiv number ");
+
+    PrintAllDigitsFrequencey(number);
+
+
+
+
+
+
+
+    return 0;
+}
