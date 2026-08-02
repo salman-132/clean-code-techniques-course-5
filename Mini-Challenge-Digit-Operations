@@ -1,0 +1,214 @@
+
+#include <iostream>
+using namespace std;
+
+int  ReadPositivNumber(string massge) {
+
+
+    int  number = 0;
+
+    do {
+        cout << massge << endl;
+        cin >> number;
+
+
+    } while (number <= 0);
+
+
+    return number;
+
+}
+
+void PrintRevesedOrder(int number) {
+
+
+
+    while (number != 0) {
+
+        cout << number % 10 << endl;
+        number = number / 10;
+
+    }
+
+
+
+}
+
+
+int  SumOfDigits(int number) {
+
+    int sum=0;
+
+    while (number != 0) {
+
+        sum += number % 10;
+        number = number / 10;
+
+    }
+
+    return sum;
+
+}
+
+
+
+int PrintReverseNumber(int Number)
+{
+
+    int Remainder = 0, Numbber2 = 0;
+
+    while (Number > 0) {
+        Remainder = Number % 10;
+        Number = Number / 10;
+        Numbber2 = Numbber2 * 10 + Remainder;
+
+
+    }
+
+    return Numbber2;
+
+}
+
+
+
+
+int DigitFrequency(int number, int Frequency) {
+
+    int Remander = 0;
+    int counter = 0;
+    while (number > 0) {
+        Remander = number % 10;
+        if (Remander == Frequency) {
+
+            counter++;
+
+        }
+
+        number = number / 10;
+
+
+    }
+    return counter;
+
+
+}
+
+
+void PrintAllDigitsFrequencey(int number)
+{
+    cout << endl;
+
+    for (int i = 0; i < 10; i++)
+    {
+        short DigitFrequncy = DigitFrequency(number, i);
+
+        if (DigitFrequncy != 0)
+        {
+            cout << "Digit " << i
+                << " frequency is "
+                << DigitFrequncy << endl;
+        }
+    }
+}
+
+
+
+void PrintMenu() {
+    int number = 0;
+    int D = 0;
+    cout << "(1)---> TO Revese Order " << endl;
+    cout << "(2)---> TO Sum Of Digits " << endl;
+    cout << "(3)---> TO New Revese Number " << endl;
+    cout << "(4)---> TO Digit Freqency " << endl;
+    cout << "(5)---> TO All Digit Freqency " << endl;
+    cout << "(6)---> TO Print Number By The Order " << endl;
+    cout << "(7)---> TO Exit " << endl;
+
+
+
+    number = ReadPositivNumber("Enter number");
+    int Op = ReadPositivNumber("chose Digit-Operations:");
+
+ 
+
+    while (Op != 7) {
+        switch (Op) {
+        case 1:
+            PrintRevesedOrder(number);
+            Op = ReadPositivNumber("chose Digit-Operations:");
+            cout << endl;
+            break;
+
+
+        case 2:
+            cout << SumOfDigits(number );
+            cout << endl;
+            Op = ReadPositivNumber("chose Digit-Operations:");
+
+            break;
+
+
+        case 3:
+            cout<<PrintReverseNumber(number);
+            cout << endl;
+            Op = ReadPositivNumber("chose Digit-Operations:");
+
+            break;
+
+
+        case 4:
+            D = ReadPositivNumber("Enter number to fond the frequncy");
+           cout<< DigitFrequency(number, D);
+           cout << endl;
+            Op = ReadPositivNumber("chose Digit-Operations:");
+
+            break;
+
+        case 5:
+            PrintAllDigitsFrequencey(number);
+            cout << endl;
+            Op = ReadPositivNumber("chose Digit-Operations:");
+            break;
+
+
+        case 6:
+            PrintRevesedOrder(PrintReverseNumber(number ));
+            cout << endl;
+            Op = ReadPositivNumber("chose Digit-Operations:");
+            break;
+        default:
+
+            cout << "Invalid Number Enter Anther number ";
+            cout << endl;
+            Op = ReadPositivNumber("chose Digit-Operations:");
+            break;
+
+
+
+        }
+
+
+    }
+
+
+
+
+}
+
+
+
+int main()
+{
+    
+
+    PrintMenu();
+     
+
+
+
+
+
+
+
+}
+ 
