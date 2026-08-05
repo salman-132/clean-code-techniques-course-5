@@ -1,0 +1,62 @@
+
+#include <iostream>
+using namespace std;
+
+
+
+
+int  ReadPositivNumber(string massge) {
+
+
+    int  number = 0;
+
+    do {
+        cout << massge << endl;
+        cin >> number;
+
+
+    } while (number <= 0);
+
+
+    return number;
+
+}
+
+
+void PrintInvetedLatterPattern(int number) {
+    number = number + 64;
+ 
+
+    for (int i = number; i >= 65; i--) {
+    
+        for (int j = i; j >=65; j--) {
+        
+            cout << char(i);
+        
+        }
+        cout << endl;
+    
+    
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+int main()
+{
+ 
+    PrintInvetedLatterPattern(ReadPositivNumber("enter positive number"));
+     
+
+
+}
