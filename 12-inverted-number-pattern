@@ -1,0 +1,57 @@
+ 
+#include <iostream>
+using namespace std;
+
+
+
+int  ReadPositivNumber(string massge) {
+
+
+    int  number = 0;
+
+    do {
+        cout << massge << endl;
+        cin >> number;
+
+
+    } while (number <= 0);
+
+
+    return number;
+
+}
+
+
+void PrintInvertedNumber(int number ) {
+
+    for (int i = number; i >= 1; i--) {
+
+        for (int j = i; j > 0; j--) {
+
+            cout << i;
+
+        }
+        cout << endl;
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+int main()
+{
+     
+    PrintInvertedNumber(ReadPositivNumber("enter positiv number"));
+
+
+}
+
+ 
