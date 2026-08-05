@@ -1,0 +1,62 @@
+#include <iostream>
+using namespace std;
+
+
+int  ReadPositivNumber(string massge) {
+
+
+    int  number = 0;
+
+    do {
+        cout << massge << endl;
+        cin >> number;
+
+
+    } while (number <= 0);
+
+
+    return number;
+
+}
+
+void PrintLetterPattern(int number) {
+
+    number = number + 64;
+
+    for (int i = 65; i <= number; i++) {
+    
+        for (int j = 65; j <= i;j++) {
+        
+        
+            cout << char(i);
+        
+        
+        }
+    
+        cout << endl;
+    
+    
+    }
+
+
+
+
+
+
+
+}
+
+
+
+
+int main()
+{
+
+    PrintLetterPattern(ReadPositivNumber("enter positiv number"));
+
+
+
+  
+}
+
+ 
