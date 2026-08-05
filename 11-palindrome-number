@@ -1,0 +1,85 @@
+
+#include <iostream>
+using namespace std;
+
+int  ReadPositivNumber(string massge) {
+
+
+    int  number = 0;
+
+    do {
+        cout << massge << endl;
+        cin >> number;
+
+
+    } while (number <= 0);
+
+
+    return number;
+
+}
+
+
+
+
+int PrintReverseNumber(int Number)
+{
+
+    int Remainder = 0, Numbber2 = 0;
+
+    while (Number > 0) {
+        Remainder = Number % 10;
+        Number = Number / 10;
+        Numbber2 = Numbber2 * 10 + Remainder;
+
+
+    }
+
+    return Numbber2;
+
+}
+
+
+
+ 
+
+
+
+bool PalinDromeOrNot(int number ) {
+
+    return number == PrintReverseNumber(number);
+
+}
+
+
+void PrintResult(int number) {
+
+ 
+        if (PalinDromeOrNot(number)) {
+            cout << "Yes ,it is a palindrome " << endl;
+
+
+        }
+        else {
+            cout << "No , it is not a palindrome " << endl;
+
+        }
+    
+    
+   
+
+
+}
+
+
+int main()
+{
+  
+    int number = ReadPositivNumber(" enter positive number ");
+    cout << "****************************" << endl;
+
+    PrintResult(number);
+
+}
+
+ 
