@@ -1,0 +1,79 @@
+#include <iostream>
+
+using namespace std;
+
+int RandomNumber(int From, int To)
+{
+    int randNum = rand() % (To - From + 1) + From;
+    return randNum;
+}
+
+
+
+void FillArrayWithRandomNumbers(int Array[100], int& length) {
+
+    for (int i = 0; i < length; i++) {
+
+
+        Array[i] = RandomNumber(1, 100);
+
+
+    }
+
+
+
+
+}
+
+
+void PrintArray(int Array[100], int& length) {
+
+
+    for (int i = 0; i < length; i++) {
+
+
+        cout << Array[i] << " ";
+    }
+
+
+}
+
+void CopyAnyArray(int Array1[100], int Array2[100], int length) {
+
+
+    for (int i = 0; i < length;i++) {
+    
+        Array2[i] = Array1[i];
+    
+    }
+
+
+
+
+}
+
+
+ 
+int main()
+{
+    srand((unsigned)time(NULL));
+
+
+    int Array1[100],Array2[100], length;
+
+
+    cout << "enter the length of the Array :" << endl;
+    cin >> length;
+    cout << "\n ";
+    FillArrayWithRandomNumbers(Array1, length);
+    cout << "the Random Array is :";
+    PrintArray(Array1, length);
+    cout << endl;
+     
+    CopyAnyArray(Array1, Array2, length);
+    cout << "the Copy Array ";
+     PrintArray(Array2,length);
+
+
+}
+
