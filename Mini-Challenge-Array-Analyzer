@@ -1,0 +1,245 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+enum enPrimNotPrim { Prime = 1, NotPrime = 2 };
+
+int ReadPostiveNumber(string meassge)
+{
+    int number;
+    do
+    {
+        cout << meassge << endl;
+        cin >> number;
+    } while (number <= 0);
+
+    return number;
+}
+
+int RandomeNumber(int From, int To)
+{
+    int RandoNumber = rand() % (To - From + 1) + From;
+    return RandoNumber;
+}
+
+enPrimNotPrim CheckPrime(int number)
+{
+    if (number < 2)
+        return enPrimNotPrim::NotPrime;
+
+    int M = number / 2;
+
+    for (int counter = 2; counter <= M; counter++)
+    {
+        if (number % counter == 0)
+            return enPrimNotPrim::NotPrime;
+    }
+
+    return enPrimNotPrim::Prime;
+}
+
+void FillRandomArray(int Array[100], int& length)
+{
+    for (int i = 0; i < length; i++)
+    {
+        Array[i] = RandomeNumber(1, 100);
+    }
+}
+
+void PrintArray(int Array[100], int length)
+{
+    for (int i = 0; i < length; i++)
+    {
+        cout << Array[i] << "  ";
+    }
+}
+
+int Sum(int Array[100], int length)
+{
+    int sum = 0;
+
+    for (int i = 0; i < length; i++)
+    {
+        sum += Array[i];
+    }
+
+    return sum;
+}
+
+float Avarage(int Array[100], int length)
+{
+    return (float)Sum(Array, length) / length;
+}
+
+int MaxNumber(int Array[100], int length)
+{
+    int max = Array[0];
+
+    for (int i = 0; i < length; i++)
+    {
+        if (max < Array[i])
+        {
+            max = Array[i];
+        }
+    }
+
+    return max;
+}
+
+int MinNumber(int Array[100], int length)
+{
+    int min = Array[0];
+
+    for (int i = 0; i < length; i++)
+    {
+        if (min > Array[i])
+        {
+            min = Array[i];
+        }
+    }
+
+    return min;
+}
+
+int EventNumber(int Array[100], int length)
+{
+    int C = 0;
+
+    for (int i = 0; i < length; i++)
+    {
+        if (Array[i] % 2 == 0)
+        {
+            C++;
+        }
+    }
+
+    return C;
+}
+
+int OddNumber(int Array[100], int length)
+{
+    int C = 0;
+
+    for (int i = 0; i < length; i++)
+    {
+        if (Array[i] % 2 != 0)
+        {
+            C++;
+        }
+    }
+
+    return C;
+}
+
+int PrimeCounter(int Array[100], int length)
+{
+    int c = 0;
+
+    for (int i = 0; i < length; i++)
+    {
+        if (CheckPrime(Array[i]) == enPrimNotPrim::Prime)
+        {
+            c++;
+        }
+    }
+
+    return c;
+}
+
+int AllSpeshal(int Array[100], int length)
+{
+    int ArrCounter = 0;
+
+    ArrCounter = Sum(Array, length);
+    ArrCounter += MaxNumber(Array, length);
+    ArrCounter += EventNumber(Array, length);
+    ArrCounter += PrimeCounter(Array, length);
+
+    return ArrCounter;
+}
+
+void Winer(int Array1[100], int Array2[100], int length)
+{
+    int Score1 = AllSpeshal(Array1, length);
+    int Score2 = AllSpeshal(Array2, length);
+
+    if (Score1 > Score2)
+    {
+        cout << "The Winer is Array1" << endl;
+        PrintArray(Array1, length);
+    }
+    else if (Score2 > Score1)
+    {
+        cout << "The Winer is Array2" << endl;
+        PrintArray(Array2, length);
+    }
+    else
+    {
+        cout << "The Winer is Draw" << endl;
+    }
+}
+
+void PrintAllDietals(int Array[100], int length)
+{
+    cout << "Maximum : ";
+    cout << MaxNumber(Array, length);
+    cout << endl;
+
+    cout << "MinNumber : ";
+    cout << MinNumber(Array, length);
+    cout << endl;
+
+    cout << "Sum : ";
+    cout << Sum(Array, length);
+    cout << endl;
+
+    cout << "Average : ";
+    cout << Avarage(Array, length);
+    cout << endl;
+
+    cout << "Event Number : ";
+    cout << EventNumber(Array, length);
+    cout << endl;
+
+    cout << "Odd Number : ";
+    cout << OddNumber(Array, length);
+    cout << endl;
+
+    cout << "Prime Number : ";
+    cout << PrimeCounter(Array, length);
+    cout << endl;
+}
+
+int main()
+{
+    srand((unsigned)time(NULL));
+
+    int Array1[100], Array2[100], length;
+
+    length = ReadPostiveNumber("Enter the length of the random array");
+
+    FillRandomArray(Array1, length);
+
+    cout << "Array One is :" << endl;
+    PrintArray(Array1, length);
+    cout << endl;
+
+    PrintAllDietals(Array1, length);
+
+    cout << "**********************************************************" << endl;
+
+    FillRandomArray(Array2, length);
+
+    cout << "Array Two is :" << endl;
+    PrintArray(Array2, length);
+    cout << endl;
+
+    PrintAllDietals(Array2, length);
+
+    cout << "\n\n";
+
+    Winer(Array1, Array2, length);
+
+    return 0;
+}
