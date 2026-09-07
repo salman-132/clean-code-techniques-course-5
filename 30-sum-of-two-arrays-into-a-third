@@ -1,0 +1,83 @@
+#include <iostream>
+using namespace std;
+
+int RandmNumber(int from,int To ) {
+
+    int RandomNumber = rand() % (To - from + 1) + from;
+    return RandomNumber;
+}
+
+
+
+
+
+void FillArrayWithRandomNumbers(int arr[100], int& arrLength)
+{
+    
+     
+    for (int i = 0; i < arrLength; i++)
+        arr[i] = RandmNumber(1, 100);
+}
+
+
+
+void PrintArray(int arr[100], int arrLength)
+{
+
+    for (int i = 0; i < arrLength; i++)
+        cout << arr[i] << " ";
+    cout << "\n";
+}
+
+
+void SumArrayInThird(int arr1[100], int arr2[100], int arr3[100], int& length) {
+
+    int sum = 0;
+    for (int i = 0; i < length;i++) {
+    
+        arr3[i] = arr2[i] + arr1[i];
+       
+    
+    }
+
+
+
+
+
+
+}
+
+
+
+
+
+int main()
+{
+    srand((unsigned)time(NULL));
+    
+    int arr1[100], arrlength;
+    int arr2[100];
+    int arr3[100];
+
+
+    cout << "enter the size of the Array :";
+    cin >> arrlength;
+
+
+    FillArrayWithRandomNumbers(arr1,arrlength);
+    FillArrayWithRandomNumbers(arr2, arrlength);
+    SumArrayInThird(arr1,arr2,arr3,arrlength);
+
+    cout << "\nThe Array One is :\t";
+    PrintArray(arr1, arrlength);
+    
+    cout << "The Array Tow is:\t";
+    PrintArray(arr2,arrlength);
+
+
+    cout << "The Sum Of Tow Array is :\t";
+    PrintArray(arr3, arrlength);
+
+
+}
+ 
