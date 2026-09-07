@@ -1,0 +1,104 @@
+#include <iostream>
+
+using namespace std;
+
+enum enPrimNotPrim { Prime = 1, NotPrime = 2 };
+
+
+enPrimNotPrim CheckPrime(int number) {
+
+
+    int M = round(number / 2);
+
+    for (int counter = 2; counter <= M; counter++) {
+
+        if (number % 2 == 0) {
+            return enPrimNotPrim::NotPrime;
+        }
+
+    }
+    return enPrimNotPrim::Prime;
+}
+
+int RandomNumber(int From, int To)
+{
+    int randNum = rand() % (To - From + 1) + From;
+    return randNum;
+}
+
+
+
+void FillArrayWithRandomNumbers(int Array[100], int& length) {
+
+    for (int i = 0; i < length; i++) {
+
+
+        Array[i] = RandomNumber(1, 100);
+
+
+    }
+
+
+
+
+}
+
+
+void PrintArray(int Array[100], int& length) {
+
+
+    for (int i = 0; i < length; i++) {
+
+
+        cout << Array[i] << " ";
+    }
+
+
+}
+
+void CopyprimeNumber(int Array1[100], int Array2[100], int arrlength,int &arr2lengh) {
+
+    int counter = 0;
+    for (int i = 0; i < arrlength; i++) {
+    
+        if (CheckPrime(Array1[i]) ==enPrimNotPrim::Prime) {
+        
+            Array2[counter] = Array1[i];
+            counter++;
+        
+        
+        }
+    
+    
+    
+    }
+
+    arr2lengh = --counter;
+
+
+
+}
+
+
+
+int main()
+{
+    srand((unsigned)time(NULL));
+
+
+    int Array1[100], Array2[100], length1,length2;
+
+
+    cout << "enter the length of the Array :" << endl;
+    cin >> length1;
+    cout << "\n ";
+    FillArrayWithRandomNumbers(Array1, length1);
+    cout << "the Random Array is :";
+    PrintArray(Array1, length1);
+    cout << endl;
+    CopyprimeNumber(Array1, Array2, length1, length2);
+    cout << "\n prime number array \n";
+    PrintArray(Array2, length2);
+
+
+}
