@@ -1,0 +1,135 @@
+#include <iostream>
+using namespace std;
+
+int ReadPositivNumber(string massge) {
+
+
+    float number = 0;
+
+    do {
+        cout << massge << endl;
+        cin >> number;
+
+
+    } while (number <= 0);
+
+    return number;
+
+}
+
+int RandomNumber(int From, int To)
+{
+    int randNum = rand() % (To - From + 1) + From;
+    return randNum;
+}
+
+void Swap(int &A,int &B) {
+    int T;
+    T = A;
+    A = B;
+    B = T;
+
+}
+
+void FillArrayWithRandomNumbers(int Array[100], int& length) {
+
+    for (int i = 0; i < length; i++) {
+
+
+        Array[i] = RandomNumber(1, 100);
+
+
+    }
+
+
+
+
+}
+
+void PrintArray(int Array[100], int& length) {
+
+
+    for (int i = 0; i < length; i++) {
+
+
+        cout << Array[i] << " ";
+    }
+
+
+}
+
+void CopyAnyArray(int Array1[100], int Array2[100], int length) {
+
+
+    for (int i = 0; i < length; i++) {
+
+        Array2[i] = Array1[i];
+
+    }
+
+
+
+
+}
+
+void ReversedArray(int Array[100], int length) {
+
+    int size = length;
+    for (int i = 0; i < length;i++) {
+    
+        Swap(Array[i],Array[size-1]);
+        
+    
+    
+    }
+
+
+
+
+
+}
+
+void CopyArrayInReverseOrder(int arrSource[100], int arrDestination[100], int arrLength)
+{
+ 
+    for (int i = 0; i < arrLength; i++)
+        arrDestination[i] = arrSource[arrLength - 1 - i];
+
+
+}
+
+
+
+int main()
+{ 
+
+    srand((unsigned)time(NULL));
+
+    int Array1[100], length;
+    int Array2[100];
+    int Array3[100];
+    length = ReadPositivNumber("Enter Positiv Number");
+
+    FillArrayWithRandomNumbers(Array1,length);
+ 
+
+    CopyAnyArray(Array1,Array2,length);
+    ReversedArray(Array2, length);
+
+    cout << "Array 1 elements :\n";
+    PrintArray(Array1,length);
+    cout << "\n";
+
+    cout << "Array 2 elements affter coping array 1 in reversed order :\n";
+    PrintArray(Array2, length);
+
+    cout << "\nAnther Way to do Reversd :\n";
+    CopyAnyArray(Array1,Array3,length);
+    PrintArray(Array3, length);
+
+
+    
+     
+}
+
+ 
