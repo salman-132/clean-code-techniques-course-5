@@ -1,0 +1,94 @@
+#include <iostream>
+using namespace std;
+
+
+int RandmNumber(int from, int To) {
+
+    int RandomNumber = rand() % (To - from + 1) + from;
+    return RandomNumber;
+}
+
+int ReadPositivNumber(string massge) {
+
+    float number = 0;
+
+    do {
+        cout << massge << endl;
+        cin >> number;
+
+
+    } while (number <= 0);
+
+    return number;
+
+}
+
+void FaillArrayFromOenToLength(int Array[100],int &length) {
+
+    int number = 1;
+    for (int i = 0; i < length;i++) {
+    
+    
+        Array[i] =number;
+        number++;
+
+
+    }
+
+}
+
+void swap(int& A, int& B) {
+    int temp;
+    temp = A;
+    A = B;
+    B = temp;
+
+}
+
+
+void PrintArray(int Array[100], int& length) {
+
+
+    for (int i = 0; i < length; i++) {
+
+
+        cout << Array[i] << " ";
+    }
+
+
+}
+
+
+void ShuffleOrdered(int Array[100], int& length) {
+    for (int i = 0; i < length;i++) {
+        swap(Array[RandmNumber(1, length) - 1], Array[RandmNumber(1, length) - 1]);
+ 
+    }
+
+
+}
+
+
+
+int main()
+{
+    srand((unsigned)time(NULL));
+
+
+    int Array[100], length;
+
+    length = ReadPositivNumber("Enter Positiv Number ");
+
+    FaillArrayFromOenToLength(Array, length);
+    
+    cout << "Array elements before shuffle:" << endl;
+    PrintArray(Array, length);
+
+    ShuffleOrdered(Array, length);
+    
+    cout << "\nArray elements after shuffle:" << endl;
+    PrintArray(Array, length);
+
+}
+
+ 
