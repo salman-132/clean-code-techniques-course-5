@@ -1,0 +1,80 @@
+#include <iostream>
+using namespace std;
+
+int ReadNumber( ) {
+    int number;
+    cout <<  "Please enter a number ?" ;
+    cin >> number;
+    
+    return number;
+}
+
+void AddArrayElement(int Array[100],int number,int &length ) {
+
+    Array[length] = number;
+    length++;
+}
+
+
+void ControlArray (int Array[100],int &length) {
+    
+
+    bool AddMore = true;
+
+    do{
+        AddArrayElement(Array, ReadNumber(), length);
+
+        cout << " Do you want to add more number ?[0]:No,[1]:Yes?";
+        cin >> AddMore;
+  
+    } while (AddMore);
+
+
+
+
+}
+
+
+
+
+
+void PringArray(int Array[100] ,int length) {
+
+    for (int i = 0; i < length;i++) {
+    
+    
+        cout << Array[i]<<" ";
+    
+    
+    }
+
+    cout << endl;
+
+
+
+}
+
+
+
+
+
+
+
+
+int main()
+{
+    int Array[100];
+    int length = 0;
+
+    ControlArray(Array,length);
+
+    cout << "Array Length :" << length << endl;
+    cout << "Array elements :";
+    PringArray(Array,length);
+
+
+
+
+}
+
+ 
