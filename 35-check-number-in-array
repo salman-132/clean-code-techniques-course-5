@@ -1,0 +1,105 @@
+#include <iostream>
+using namespace std;
+
+
+int ReadPositivNumber(string massge) {
+    float number = 0;
+
+    do {
+        cout << massge << endl;
+        cin >> number;
+
+
+    } while (number <= 0);
+
+    return number;
+
+}
+
+
+int RandomNumber(int From, int To)
+{
+    int randNum = rand() % (To - From + 1) + From;
+    return randNum;
+}
+
+void FullArray(int Array[100], int& length) {
+    length = ReadPositivNumber("enter positiv number ");
+    for (int i = 0; i <= length; i++) {
+
+        Array[i] = RandomNumber(0, 99);
+
+
+    }
+
+
+
+
+}
+void PrintArray(int Array[100], int length) {
+
+
+    for (int i = 0; i < length; i++) {
+
+        cout << Array[i] << " ";
+
+
+    }
+
+
+}
+
+
+
+bool CheckNumber(int Array[100], int length, int number) {
+    for (int i = 0; i < length; i++) {
+        if (number == Array[i]) {
+            return true ;
+
+        }
+
+
+    }
+    return false;
+}
+
+
+
+
+
+int main()
+{
+    srand((unsigned)time(NULL));
+
+    int Array[100], length;
+    FullArray(Array, length);
+
+    int SearchNumber;
+
+
+
+
+    PrintArray(Array, length);
+    cout << endl;
+    SearchNumber = ReadPositivNumber("Pleas enter a number to search for");
+     
+
+    if ( CheckNumber(Array,length,SearchNumber)==true ) {
+        cout << "Number you are looking is :" << SearchNumber << endl;
+        cout << "Yes, The number is found :-)" << endl;
+
+
+    }
+    else {
+
+        cout << "Number you are looking is :" << SearchNumber << endl;
+        cout << "Yes, The number is nit found :-(" << endl;
+ 
+
+    }
+
+    return 0;
+
+
+
+}
