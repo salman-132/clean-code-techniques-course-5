@@ -1,0 +1,115 @@
+ #include <iostream>
+using namespace std;
+
+
+int ReadPositivNumber(string massge) {
+    float number = 0;
+
+    do {
+        cout << massge << endl;
+        cin >> number;
+
+
+    } while (number <= 0);
+
+    return number;
+
+}
+int RandomNumber(int From, int To)
+{
+    int randNum = rand() % (To - From + 1) + From;
+    return randNum;
+}
+
+
+
+void FullArray(int Array[100], int& length) {
+    length = ReadPositivNumber("enter positiv number ");
+    for (int i = 0; i <= length; i++) {
+
+        Array[i] = RandomNumber(0, 99);
+
+
+    }
+
+
+
+
+}
+ 
+
+void AddArrayElement(int Array[100], int number, int &length) {
+length++;
+    Array[length-1] = number;
+    
+}
+
+
+
+void copyArray(int Array1[100], int Array2[100], int Arr1length,int &Arr2Length) {
+    
+    for (int i = 0; i < Arr1length;i++) {
+        
+        AddArrayElement(Array2, Array1[i], Arr2Length);
+    
+    }
+
+
+
+
+
+}
+
+
+void PringArray(int Array[100], int length) {
+
+    for (int i = 0; i < length; i++) {
+
+
+        cout << Array[i] << " ";
+
+
+    }
+
+    cout << endl;
+
+
+
+}
+
+
+int main()
+{
+
+    srand((unsigned) time(NULL));
+
+    int Array1[100], Arr1length = 0;
+    int ArrayCopy[100], Arr2length = 0;
+
+    
+    
+    FullArray(Array1, Arr1length);
+
+    copyArray(Array1, ArrayCopy, Arr1length,Arr2length);
+
+
+    cout << "Array 1 elements is:" << endl;
+    PringArray(Array1,Arr1length);
+
+    cout << "Array 2 elements is " << endl;
+    PringArray(ArrayCopy, Arr2length);
+
+
+
+
+
+
+
+      
+
+
+
+    return 0;
+}
+
+ 
