@@ -1,0 +1,105 @@
+#include <iostream>
+using namespace std;
+
+
+int ReadPositivNumber(string massge) {
+    float number = 0;
+
+    do {
+        cout << massge << endl;
+        cin >> number;
+
+
+    } while (number <= 0);
+
+    return number;
+
+}
+
+
+int RandomNumber(int From, int To)
+{
+    int randNum = rand() % (To - From + 1) + From;
+    return randNum;
+}
+
+void FullArray(int Array[100],int &length) {
+    length = ReadPositivNumber("enter positiv number ");
+    for (int i = 0; i <= length;i++) {
+    
+        Array[i] = RandomNumber(0,99);
+    
+    
+    }
+
+
+
+
+}
+void PrintArray(int Array[100], int length) {
+
+
+    for (int i = 0; i <=length;i++) {
+    
+        cout << Array[i] << " ";
+    
+    
+    }
+
+
+}
+
+
+
+int findNumber(int Array[100], int length, int number) {
+    for (int i = 0; i < length;i++) {
+        if (number ==Array[i]) {
+            return i;
+        
+        }
+    
+    
+    }
+    return -1;
+}
+
+
+ 
+
+
+int main()
+{
+	srand((unsigned)time(NULL));
+ 
+    int Array[100], length; 
+    FullArray(Array,length);
+    
+    int SearchNumber;
+    
+
+
+
+    PrintArray(Array,length);
+    cout << endl;
+    SearchNumber = ReadPositivNumber("Pleas enter a number to search for");
+    short Position = findNumber(Array, length, SearchNumber);
+
+    if (SearchNumber==-1) {
+        cout << "The number is not found :-(" << endl;
+    
+    
+    }
+    else {
+    
+        cout << "Number you are looking for is :" << SearchNumber << endl;
+        cout << "The number found at position :"<<Position << endl;
+        cout << "The number found its order " << Position + 1;
+    
+    }
+
+    return 0;
+
+ 
+
+}
+ 
