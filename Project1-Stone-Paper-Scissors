@@ -1,294 +1,271 @@
+```cpp
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <limits>
 using namespace std;
 
-
-enum enStonePapreScissor { Stone = 1, Papre = 2, Scissor = 3 };
-
-
-enum enWiner { Win = 1, Drow = 2 ,loser=3};
-
-struct stGame {
-
-    enStonePapreScissor PlayerChoes;
-    enWiner WinerPlayer;
+enum enStonePaperScissors
+{
+    Stone = 1,
+    Paper = 2,
+    Scissors = 3
 };
 
-int ReadNumber() {
+enum enWinner
+{
+    Win = 1,
+    Draw = 2,
+    Loser = 3
+};
 
+struct stGame
+{
+    enStonePaperScissors PlayerChoice;
+    enStonePaperScissors ComputerChoice;
+    enWinner WinnerPlayer;
+};
 
-    int number;
+// Read a number within a specific range
+int ReadNumber(int From, int To, string Message)
+{
+    int Number;
 
+    do
+    {
+        cout << Message;
 
-    do {
+        if (!(cin >> Number))
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            Number = From - 1;
+        }
 
-        cin >> number;
+    } while (Number < From || Number > To);
 
-    } while (number < 0);
-
-    return number;
-
+    return Number;
 }
 
+// Generate a random number
 int RandomNumber(int From, int To)
 {
-    int RandomNumber = rand() % (To - From + 1) + From;
-    return RandomNumber;
-
+    return rand() % (To - From + 1) + From;
 }
 
-void MapOnePlay() {
-
-    cout << "Stone[1] , Paper[2] , Scissor[3]\n";
-
+// Display player choices
+void MapOnePlay()
+{
+    cout << "Stone [1], Paper [2], Scissors [3]\n";
 }
 
-stGame PlayerChose() {
-
-    stGame Player;
+// Read player's choice
+enStonePaperScissors PlayerChose()
+{
     MapOnePlay();
-    Player.PlayerChoes = (enStonePapreScissor)ReadNumber();
 
-    return Player;
+    return (enStonePaperScissors)
+        ReadNumber(1, 3, "Enter your choice: ");
 }
 
-stGame CoputerCose() {
-
-    stGame Computer;
-    Computer.PlayerChoes = (enStonePapreScissor)RandomNumber(1, 3);
-    return Computer;
+// Generate computer's choice
+enStonePaperScissors ComputerChose()
+{
+    return (enStonePaperScissors)RandomNumber(1, 3);
 }
 
-stGame TheWiners() {
+// Return the winner of the round
+enWinner TheWinner(enStonePaperScissors Player,
+                   enStonePaperScissors Computer)
+{
+    if (Player == Computer)
+        return Draw;
 
-    stGame Player = PlayerChose();
-    stGame Computer = CoputerCose();
-
-    if ((Player.PlayerChoes==Papre && Computer.PlayerChoes==Stone)||
-        (Player.PlayerChoes==Stone&&Computer.PlayerChoes==Scissor)||
-        (Player.PlayerChoes==Scissor&&Computer.PlayerChoes==Papre)) {
-    
-        Player.WinerPlayer = Win;
-    
-        return Player;
-    
+    if ((Player == Paper && Computer == Stone) ||
+        (Player == Stone && Computer == Scissors) ||
+        (Player == Scissors && Computer == Paper))
+    {
+        return Win;
     }
-    else if ((Player.PlayerChoes == Papre && Computer.PlayerChoes == Scissor) ||
-        (Player.PlayerChoes == Stone && Computer.PlayerChoes == Papre) ||
-        (Player.PlayerChoes == Scissor && Computer.PlayerChoes == Stone)) {
-    
-    
-        Player.WinerPlayer = loser;
-        return Player;
-    
-    }
-    else {
-    
-        Player.WinerPlayer = Drow;
-        return Player;
-    }
-    
 
-
-
+    return Loser;
 }
 
-void AllRounds() {
+// Return choice name
+string ChoiceName(enStonePaperScissors Choice)
+{
+    switch (Choice)
+    {
+    case Stone:
+        return "Stone";
 
-    cout << "***************************************************************\n";
-    cout << "\t+++G A M E++\t\n";
-    cout << "***************************************************************\n";
-    int Rounds;
-    cout << "How many Rounds[1-10]\n";
-    Rounds= ReadNumber();
+    case Paper:
+        return "Paper";
 
-    int PlayerWins=0;
-    int PlayerLose=0;
-    int PlayerDrow=0;
-    stGame CheakNumber;
+    case Scissors:
+        return "Scissors";
 
-cout << "-------[Round" << 1 << "]-------\n";
-    for (int i = 0; i < Rounds;i++) {
-    
-        CheakNumber = TheWiners();
-        
-        if (CheakNumber.WinerPlayer == Win) {
-        
+    default:
+        return "Unknown";
+    }
+}
+
+// Display the round result
+void PrintRoundResults(stGame Game)
+{
+    cout << "\nPlayer choice   : "
+         << ChoiceName(Game.PlayerChoice) << endl;
+
+    cout << "Computer choice : "
+         << ChoiceName(Game.ComputerChoice) << endl;
+
+    if (Game.WinnerPlayer == Win)
+    {
+        cout << "Round winner    : Player\n";
+        system("color 2F");
+    }
+    else if (Game.WinnerPlayer == Loser)
+    {
+        cout << "Round winner    : Computer\n";
+        system("color 4F");
+        cout << "\a";
+    }
+    else
+    {
+        cout << "Round winner    : Draw\n";
+        system("color 6F");
+    }
+}
+
+// Play one round
+stGame TheWinners()
+{
+    stGame Game;
+
+    Game.PlayerChoice = PlayerChose();
+    Game.ComputerChoice = ComputerChose();
+
+    Game.WinnerPlayer =
+        TheWinner(Game.PlayerChoice, Game.ComputerChoice);
+
+    return Game;
+}
+
+// Display game results
+void ShowGameResults(int Rounds, int PlayerWins,
+                     int ComputerWins, int Draws)
+{
+    cout << "\n--------------------------------------------------\n";
+    cout << "\t\tGAME OVER\n";
+    cout << "--------------------------------------------------\n";
+
+    cout << "\n-------------- Game Results --------------\n";
+
+    cout << "Game rounds       : " << Rounds << endl;
+    cout << "Player wins       : " << PlayerWins << endl;
+    cout << "Computer wins     : " << ComputerWins << endl;
+    cout << "Draws             : " << Draws << endl;
+
+    if (PlayerWins > ComputerWins)
+    {
+        cout << "Final winner      : Player\n";
+        system("color 2F");
+    }
+    else if (ComputerWins > PlayerWins)
+    {
+        cout << "Final winner      : Computer\n";
+        system("color 4F");
+    }
+    else
+    {
+        cout << "Final result      : Draw\n";
+        system("color 6F");
+    }
+
+    cout << "------------------------------------------\n";
+}
+
+// Play all rounds
+void AllRounds()
+{
+    cout << "********************************************************\n";
+    cout << "\t\tSTONE PAPER SCISSORS\n";
+    cout << "********************************************************\n";
+
+    int Rounds = ReadNumber(
+        1, 10, "How many rounds? [1-10]: ");
+
+    int PlayerWins = 0;
+    int ComputerWins = 0;
+    int Draws = 0;
+
+    for (int i = 1; i <= Rounds; i++)
+    {
+        cout << "\n----------- Round [" << i << "] -----------\n";
+
+        stGame Game = TheWinners();
+
+        if (Game.WinnerPlayer == Win)
+        {
             PlayerWins++;
-            system("Color 2f");
-
-            if (CheakNumber.PlayerChoes == Papre) {
-            
-                cout << "Player choice :Paper\n";
-                cout << "Computer choice :Stone\n";
-                cout << "Round winner :Player\n";
-            
-            }
-            else if (CheakNumber.PlayerChoes==Stone) {
-                cout << "Player choice :Stone\n";
-                cout << "Computer choice :Scisser\n";
-                cout << "Round winner :Player\n";
-            
-            }
-            else {
-            
-                cout << "Player choice :Scisser\n";
-                cout << "Computer choice :Paper\n";
-                cout << "Round winner :Player\n";
-            
-            
-            }
-
-
-
-
-        
         }
-        else if (CheakNumber .WinerPlayer== loser) {
-
-        
-            PlayerLose++;
-            system("Color 4f");
-            cout << "\a";
-
-
-
-            if (CheakNumber.PlayerChoes == Papre) {
-
-                cout << "Player choice :Paper\n";
-                cout << "Computer choice :Scisser\n";
-                cout << "Round winner :Computer\n";
-
-            }
-            else if (CheakNumber.PlayerChoes == Stone) {
-                cout << "Player choice :Stone\n";
-                cout << "Computer choice :Paper\n";
-                cout << "Round winner :Computer\n";
-
-            }
-            else {
-
-                cout << "Player choice :Scisser\n";
-                cout << "Computer choice :Stone\n";
-                cout << "Round winner :Computer \n";
-
-
-            }
-
-
-
-
-
-
+        else if (Game.WinnerPlayer == Loser)
+        {
+            ComputerWins++;
         }
-        else {
-        
-            PlayerDrow++;
-            system("color 6f");
-
-
- 
-            if (CheakNumber.PlayerChoes == Papre) {
-
-                cout << "Player choice :Paper\n";
-                cout << "Computer choice :Paper\n";
-                cout << "Round winner :No Oen\n";
-
-            }
-            else if (CheakNumber.PlayerChoes == Stone) {
-                cout << "Player choice :Stone\n";
-                cout << "Computer choice :Stone\n";
-                cout << "Round winner :No One\n";
-
-            }
-            else {
-
-                cout << "Player choice :Scisser\n";
-                cout << "Computer choice :Scisser\n";
-                cout << "Round winner :No One \n";
-
-
-            }
-
-
-
-
-
-
-            
+        else
+        {
+            Draws++;
         }
 
-        
-        if (i<Rounds-1) {
-        
-            cout << "-------[Round" << i + 2 << "]-------\n";
-
-        }
-        
-    
+        PrintRoundResults(Game);
     }
 
-
-    cout << "------------------------------------------------------------\n";
-    cout << "\t\t++ G a m e   O v e r++\t\t\n";
-    cout << "------------------------------------------------------------\n\n";
-
-    cout << "--------------[Game Results]--------------\n";
-    cout << "Game Rounds:" << Rounds<<endl;
-    cout << "Player won times:" << PlayerWins << endl;
-    cout << "Computer won times:" << PlayerLose << endl;
-    cout << "Draw times:" << PlayerDrow << endl;
-    if (PlayerWins>PlayerLose) {
-        system("Color 2f");
-    
-    }
-    else if (PlayerLose>PlayerWins) {
-    
-        system("Color 4f");
-    }
-    else {
-    
-        system("color 6f");
-    
-    }
-
+    ShowGameResults(
+        Rounds, PlayerWins, ComputerWins, Draws);
 }
 
-void Cleans() {
-
+// Clear the screen
+void Cleans()
+{
     system("cls");
-
+    system("color 0F");
 }
 
-void Agane() {
-    AllRounds();
+// Ask the player to play again
+void Again()
+{
+    char Answer;
 
-    bool A=true;
-     
-    
-    
-    while (A){
-        cout << "Do you need anther game[0-1] " << endl;
-        cin >> A;
-        if ((A == false) || (A = 0)) {
-        
-            break;
-        }
-        Cleans();
+    do
+    {
         AllRounds();
-    } 
 
+        cout << "\nDo you want to play another game? [Y/N]: ";
+        cin >> Answer;
+
+        while (Answer != 'Y' && Answer != 'y' &&
+               Answer != 'N' && Answer != 'n')
+        {
+            cout << "Please enter Y or N: ";
+            cin >> Answer;
+        }
+
+        if (Answer == 'Y' || Answer == 'y')
+        {
+            Cleans();
+        }
+
+    } while (Answer == 'Y' || Answer == 'y');
 }
-
 
 int main()
 {
     srand((unsigned)time(NULL));
 
+    Again();
 
-    Agane();
-
-    
-  
     return 0;
 }
-
+```
+    
